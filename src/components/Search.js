@@ -1,5 +1,6 @@
 import React from 'react';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import CartBtn from './CartBtn';
 
 class Search extends React.Component {
   state = {
@@ -53,6 +54,7 @@ class Search extends React.Component {
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
+        <CartBtn />
         { loading && <p>Loading...</p>}
         <div>
           <h4>Categorias:</h4>
