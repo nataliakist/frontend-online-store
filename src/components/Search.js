@@ -74,7 +74,6 @@ class Search extends React.Component {
               <section key={ category.id }>
                 <label htmlFor={ category.id } data-testid="category">
                   <input
-                    data-testid="category"
                     name="categorieList"
                     type="radio"
                     value={ category.id } // o valor sera o id da categoria

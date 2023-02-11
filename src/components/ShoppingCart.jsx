@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// página do carrinho de compras
 class ShoppingCart extends Component {
   render() {
     return (
