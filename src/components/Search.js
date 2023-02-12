@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
@@ -41,6 +42,7 @@ class Search extends React.Component {
   };
 
   render() { // criando os elementos na pagina de Search que esta contida na pasta components
+    const { addCart } = this.props; // importando a funcao addCart do App
     const { categories, loading, searchInput, productsList, selectCateg } = this.state; // capturando as keys de state
     return ( // search esta sendo exportada para o App
       <div>
@@ -65,7 +67,7 @@ class Search extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <CartBtn />
-        { loading /* Se loadinf for true */ && <p>Loading...</p>}
+        { loading /* Se loading for true */ && <p>Loading...</p>}
         <div>
           <h4>Categorias:</h4>
           {
@@ -103,6 +105,13 @@ class Search extends React.Component {
                     <h3>{product.title}</h3>
                     <h4>{product.price}</h4>
                   </Link>
+                  <button
+                    type="button"
+                    data-testid="product-add-to-cart"
+                    onClick={ addCart } // ao clicar no botao chama a funcao addCart para adicionar o produto ao carrinho
+                  >
+                    Adicionar ao carrinho
+                  </button>
                 </section>
               ))
             )
@@ -112,5 +121,9 @@ class Search extends React.Component {
     );
   }
 }
+
+Search.propTypes = {
+  addCart: PropTypes.func.isRequired,
+};
 
 export default Search;
