@@ -108,7 +108,7 @@ class Search extends React.Component {
                   <button
                     type="button"
                     data-testid="product-add-to-cart"
-                    onClick={ addCart } // ao clicar no botao chama a funcao addCart para adicionar o produto ao carrinho
+                    onClick={ () => addCart(product) } // ao clicar no botao chama a funcao addCart para adicionar o produto ao carrinho
                   >
                     Adicionar ao carrinho
                   </button>

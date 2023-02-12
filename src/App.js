@@ -11,23 +11,28 @@ class App extends React.Component {
   };
 
   addCart = (product) => {
-    const { cart } = state;
-    const { id, title, price, thumbnail } = product;
-    if (cart[id]) {
-      cart[id].quantity += 1;
-    } else {
-      cart[id] = {
-        id,
-        title,
-        price,
-        thumbnail,
-        quantity: 1,
-      };
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    setState({
-      cart,
+    const { cart } = this.state;
+    const { id } = product;
+
+    const newCart = cart[id] ? { // se o item já estiver no carrinho
+      ...cart, // copia o carrinho
+      [id]: { // sobrescreve o valor do item
+        ...cart[id], // espalha o conteúdo do item
+        quantity: cart[id].quantity + 1, // incrementa a quantidade
+      },
+    } : { // se o item não estiver no carrinho
+      ...cart, // copia o carrinho
+      [id]: { // sobrescreve o valor do item
+        product, // adiciona o produto
+        quantity: 1, // define a quantidade
+      },
+    };
+
+    this.setState({
+      cart: newCart, // atualiza o estado
     });
+
+    localStorage.setItem('cart', JSON.stringify(newCart)); // atualiza o localStorage
   };
 
   // removeCart = (id) => {
@@ -44,7 +49,7 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            render={ (props) => <Search { ...props } onClick={ this.addCart } /> }
+            render={ (props) => <Search { ...props } addCart={ this.addCart } /> }
           />
           <Route
             path="/cart"
