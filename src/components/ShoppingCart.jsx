@@ -4,13 +4,11 @@ import React, { Component } from 'react';
 // página do carrinho de compras
 class ShoppingCart extends Component {
   render() {
-    const { cart } = this.props;
-    console.log(cart);
-    console.log(Object.values(cart));
+    const { cart } = this.props; // cart é um objeto com os produtos do carrinho
     return (
       <div className="shopping-cart">
-        { Object.keys(cart).length > 0 ? (
-          Object.values(cart).map((item) => (
+        { Object.keys(cart).length > 0 ? ( // se o carrinho não estiver vazio
+          Object.values(cart).map((item) => ( // itera sobre os produtos do carrinho
             <div key={ item.product.title }>
               <p data-testid="shopping-cart-product-name">{ item.product.title }</p>
               <img src={ item.product.thumbnail } alt={ item.product.title } />
@@ -18,8 +16,8 @@ class ShoppingCart extends Component {
               <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
             </div>
           ))
-        ) : (
-          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        ) : ( // se o carrinho estiver vazio
+          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p> // mensagem de carrinho vazio
         )}
       </div>
     );

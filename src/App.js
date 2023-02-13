@@ -49,13 +49,17 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            render={ (props) => <Search { ...props } addCart={ this.addCart } /> }
+            render={ (props) => <Search { ...props } addCart={ this.addCart } /> } // passa a função addCart como prop
           />
           <Route
             path="/cart"
-            render={ (props) => <ShoppingCart { ...props } cart={ cart } /> }
+            render={ (props) => <ShoppingCart { ...props } cart={ cart } /> } // passa o carrinho como prop
           />
-          <Route exact path="/products/:id" component={ Products } />
+          <Route
+            exact
+            path="/products/:id"
+            render={ (props) => <Products { ...props } addCart={ this.addCart } /> } // passa a função addCart como prop
+          />
         </Switch>
       </div>
 

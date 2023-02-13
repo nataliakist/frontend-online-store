@@ -25,9 +25,13 @@ class Products extends Component {
   };
 
   render() {
+    const { addCart } = this.props; // acessando a funcao addCart
     const { productDetail } = this.state; // capturando a key do state
     return (
       <div>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          Carrinho de Compras
+        </Link>
         <h2 data-testid="product-detail-name">{ productDetail.title }</h2>
         <img
           data-testid="product-detail-image"
@@ -35,9 +39,18 @@ class Products extends Component {
           alt={ productDetail.title } // texto alternativo em caso de falha de upload da img e abaixo há o direciomento para o carrinho atraves de link
         />
         <h4 data-testid="product-detail-price">{ productDetail.price }</h4>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          Carrinho de Compras
-        </Link>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => addCart({ // passando productDetail para a funcao addCart
+            title: productDetail.title,
+            price: productDetail.price,
+            thumbnail: productDetail.thumbnail,
+            id: productDetail.id,
+          }) }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
@@ -49,6 +62,10 @@ Products.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+};
+
+Products.propTypes = {
+  addCart: PropTypes.func.isRequired,
 };
 
 export default Products;
